@@ -1,3 +1,4 @@
+
 word = input("Please enter your message: ")
 morze_alphabet = (
     " .- ", " -... ", " -.-. ", " -.. ", " . ", " ..-. ", " --. ", " .... ", " .. ", " .--- ", " -.- ", " .-.. ",
@@ -12,4 +13,5 @@ for letters in range(len(splited)):
     a.append(morze_alphabet[alphabet.index(splited[letters])])
     output = ''.join(a)
 print(output)
+print("Thanks for using my SW!")
 
