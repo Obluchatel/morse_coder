@@ -1,3 +1,3 @@
 # morse_coder
-Simple script to translate Latin input into Morse's code
+<header>Simple script to translate Latin input into Morse's code</header>
 server and client achitecture included :)
