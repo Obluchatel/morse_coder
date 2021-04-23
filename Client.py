@@ -5,8 +5,10 @@ PORT = 8888  # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    message = input('Input your message: ')
-    s.sendall(message.encode())
-    data = s.recv(1024)
-
-print('Received' + (data.decode()))
+    while True:
+        message = input('Input your message: ')
+        if message == '!':
+            break
+        s.sendall(message.encode())
+        data = s.recv(1024)
+        print('Received' + (data.decode()))
