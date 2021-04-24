@@ -18,7 +18,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         sound = str(data.decode())
         print(sound)
         for i in data.decode():
-            print(i)
             if i == '.':
                 winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
                 time.sleep(0.1)
@@ -28,8 +27,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             elif i == ' ':
                 pass
 
-        # winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-        # winsound.Beep(1000, 400)  # Beep at 1000 Hz for 100 ms
 
 
 
