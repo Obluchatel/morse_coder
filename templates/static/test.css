@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+    align-items: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+p {
+    font-family: verdana;
+    font-size: 40px;
+    background-color: black;
+    color: white;
+    
+}
+h2 {
+    color: navy;
+    margin-left: 20px;
+    text-align: center;
+}
+form{
+    color: white;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+input {
+    display: table;
+    margin: auto; 
+    align-items: center;
+    height: 100%;
+    color:black;
+}
+
