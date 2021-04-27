@@ -1,19 +1,55 @@
 <!DOCTYPE html>
+<style>
+body {
+    background-color: black;
+    align-items: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+p {
+    font-family: verdana;
+    font-size: 40px;
+    background-color: black;
+    color: white;
+
+}
+h2 {
+    color: navy;
+    margin-left: 20px;
+    text-align: center;
+}
+form{
+    color: white;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+input {
+    display: table;
+    margin: auto;
+    align-items: center;
+    height: 100%;
+    color:black;
+}
+</style>>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="static/test.css">
+        <link href="{{ url_for('static', filename='/test.css') }}" rel="stylesheet" type="text/css">
         <title>
-            CV - Rogier
+            Morse_Coder
         </title>
     </head>
     <body>
-        <h3>
-            Study
-        </h3>
         <p>
-            Enter your message and I will play it for you.<br>
+            Enter your message and I will translate it for you:
             <form action="/coder" method="post">
-                Enter your message: <input type="text" name="message">  <br />
+                <input type="text" name="message">  
                 <input type="submit" name= "form" value="Submit" />
             </form>
         </p>

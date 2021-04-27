@@ -38,16 +38,16 @@ import time
 app = Flask(__name__)
 
 
-def play_coded_message(message):
-    for i in message:
-        if i == '.':
-            winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-            time.sleep(0.1)
-        elif i == '-':
-            winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
-            time.sleep(0.1)
-        elif i == ' ':
-            pass
+# def play_coded_message(message):
+#     for i in message:
+#         if i == '.':
+#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == '-':
+#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == ' ':
+#             pass
 
 
 
@@ -73,6 +73,7 @@ def morse(message):
     return output
 
 
+
 @app.route('/')
 def index():
     return render_template('test.html')
@@ -81,9 +82,37 @@ def index():
 @app.route('/coder', methods=['POST'])
 def hello():
     message = request.form['message']
-    return 'Your message %s <br/>Your translation %s <br/> Here is your sound <a href="/sound">Sound</a> <br/><a href="/">Back Home</a>' % (
+    return 'Your message %s <br/>Your translation %s <br/> <a href="/">Back Home</a>' % (
         message, morse(message))
 
+
+# Here is your sound <a href="/sound"><button>Sound</button></a> <br/>
+
+# @app.route('/sound')
+# def sound(notes):
+#     for i in notes:
+#         if i == '.':
+#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == '-':
+#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == ' ':
+#             pass
+
+# //background process happening without any refreshing
+# @app.route('/sound')
+# def sound():
+#     output = request.form['message']
+#     for i in output:
+#         if i == '.':
+#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == '-':
+#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
+#             time.sleep(0.1)
+#         elif i == ' ':
+#             pass
 
 # @app.route('/sound')
 # def play_coded_message(message):
@@ -98,6 +127,7 @@ def hello():
 #         elif i == ' ':
 #             pass
 #         return 'Your Sound played<br/>'
+
 
 
 if __name__ == '__main__':
