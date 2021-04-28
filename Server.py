@@ -1,55 +1,6 @@
-# import socket
-# HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-# PORT = 8888        # Port to listen on (non-privileged ports are > 1023)
-
-# def morse(word):
-#     global output
-#     morze_alphabet = (
-#     " .- ", " -... ", " -.-. ", " -.. ", " . ", " ..-. ", " --. ", " .... ", " .. ", " .--- ", " -.- ", " .-.. ",
-#     " -- ",
-#     " -. ",
-#     " --- ", " .--. ", " --.- ", " .-. ", " ... ", " - ", " ..- ", " ...- ", " .-- ", " -..- ", " -.-- ", " --.. ", " / ")
-#     alphabet = ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
-#             "w", "x", "y", "z", " ")
-#     a = []
-#     word = str(word, 'UTF-8')
-#     splited = list(word.lower())
-#     for letters in range(len(splited)):
-#         a.append(morze_alphabet[alphabet.index(splited[letters])])
-#         output = ''.join(a)
-#     return output.encode()
-#
-#
-# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-#     s.bind((HOST, PORT))
-#     s.listen()
-#     conn, addr = s.accept()
-#     with conn:
-#         print('Connected by', addr)
-#         while True:
-#             data = conn.recv(1024)
-#             conn.sendall(morse(data))
-
-
-from flask import Flask, render_template, request
 import winsound
+from tkinter import *
 import time
-
-app = Flask(__name__)
-
-
-# def play_coded_message(message):
-#     for i in message:
-#         if i == '.':
-#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == '-':
-#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == ' ':
-#             pass
-
-
 
 def morse(message):
     global output
@@ -63,72 +14,41 @@ def morse(message):
         "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
         "w", "x", "y", "z", " ")
     a = []
-    # message = str(message, 'UTF-8')
     splited = list(message.lower())
     for letters in range(len(splited)):
         a.append(morze_alphabet[alphabet.index(splited[letters])])
         output = ''.join(a)
-    # return output.encode()
-    # play_coded_message(output)
     return output
 
+def sound(message):
+    for i in message:
+        if i == '.':
+            winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
+            time.sleep(0.1)
+        elif i == '-':
+            winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
+            time.sleep(0.1)
+        elif i == ' ':
+            pass
 
+root = Tk()
 
-@app.route('/')
-def index():
-    return render_template('test.html')
+e = Entry(root, width=50, borderwidth=5)
+e.pack()
+e.get()
+e.insert (0, "Enter your message: ")
 
+def myClick():
+    translated = morse(e.get())
+    myLabel = Label(root, text=translated)
+    myLabel.pack()
 
-@app.route('/coder', methods=['POST'])
-def hello():
-    message = request.form['message']
-    return 'Your message %s <br/>Your translation %s <br/> <a href="/">Back Home</a>' % (
-        message, morse(message))
+def play_coded_message():
+    sound(output)
 
+myButton = Button(root, text="Translate it to morse!", command=myClick)
+myButton.pack()
 
-# Here is your sound <a href="/sound"><button>Sound</button></a> <br/>
-
-# @app.route('/sound')
-# def sound(notes):
-#     for i in notes:
-#         if i == '.':
-#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == '-':
-#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == ' ':
-#             pass
-
-# //background process happening without any refreshing
-# @app.route('/sound')
-# def sound():
-#     output = request.form['message']
-#     for i in output:
-#         if i == '.':
-#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == '-':
-#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == ' ':
-#             pass
-
-# @app.route('/sound')
-# def play_coded_message(message):
-#     message = request.form['message']
-#     for i in message:
-#         if i == '.':
-#             winsound.Beep(1000, 100)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == '-':
-#             winsound.Beep(1000, 600)  # Beep at 1000 Hz for 100 ms
-#             time.sleep(0.1)
-#         elif i == ' ':
-#             pass
-#         return 'Your Sound played<br/>'
-
-
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8888)
+playsound = Button(root, text="Play it", command=play_coded_message)
+playsound.pack()
+root.mainloop()
